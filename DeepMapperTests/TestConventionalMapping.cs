@@ -196,6 +196,38 @@ namespace DeepMapperTests
 
         }
 
+        [Fact]
+        public void TwoLevelNestedClassMustBeMappedToNewInstance()
+        {
+
+            var car = new ClassWithTwoLevelEngine
+            {
+                Name = "i9",
+                Manufacturer = "ClassWithConstructor",
+                TwoLevel = new TwoLevelEngine
+                {
+                     
+                    Engine = new Engine
+                    {
+                        
+                            Volume = 3500,
+                            Manufacturer = "ClassWithConstructor",
+                            Cylinder = 8
+                        
+                    },
+                    Model = "A21"
+                }
+            };
+
+            var twoLevel = new Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithTwoLevelEngine>(car);
+            
+
+
+            Assert.False(object.ReferenceEquals(car.TwoLevel, twoLevel?.TwoLevel));
+            Assert.False(object.ReferenceEquals(car.TwoLevel.Engine, twoLevel?.TwoLevel.Engine));
+
+        }
+
 
 
 
