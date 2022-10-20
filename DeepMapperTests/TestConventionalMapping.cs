@@ -74,7 +74,7 @@ namespace DeepMapperTests
         }
 
         [Fact]
-        public void MapClassToItSelf()
+        public void MapClassToItSelfMustResultNewInstance()
         {
             var ClassWithConstructor = new ClassWithConstructor("ClassWithConstructor", "ClassWithConstructor", new Engine { Manufacturer = "ClassWithConstructor", Cylinder = 12, Volume = 3500 }, 10);
 
