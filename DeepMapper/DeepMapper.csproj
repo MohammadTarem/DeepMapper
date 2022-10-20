@@ -4,7 +4,20 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>DeepMapper is an easy to use object mapper. </Title>
+    <Authors>Mohammad Tarem</Authors>
+    <Copyright>2022 Mohammad Tarem</Copyright>
+    <Description>DeepMapper is an object mapper based on reflection. It enables all types of mapping between value and reference types. It is easy to configure and can be used to deep copy an object.</Description>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\SimpleMapper\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
