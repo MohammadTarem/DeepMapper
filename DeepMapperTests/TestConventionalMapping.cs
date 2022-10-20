@@ -1,4 +1,4 @@
-using SimpleMapperTests.Helpers;
+using DeepMapperTests.Helpers;
 using DeepMapper;
 namespace DeepMapperTests
 {
