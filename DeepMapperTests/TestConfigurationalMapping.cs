@@ -181,6 +181,34 @@ namespace DeepMapperTests
             Assert.Null(bmw);
         }
 
+        [Fact]
+        public void ConventionalMappingMustWorkIfConfigured()
+        {
+            var config = new MappingConfigurations();
+            config.Map<Car, ClassWithoutConstructor>()
+                .ToProperty(d => d.Name, s => s.Name)
+                .UseConventionalMapping();
+
+            var engine = new Engine { Manufacturer = "BMWWW", Cylinder = 8, Volume = 3500 };
+
+            config.UseConfigurationalMapping();
+
+            var car = new Car
+            {
+                Name = "BMW",
+                Manufacturer = "BM",
+                Engine = new Engine { Manufacturer = "BMW", Cylinder = 8, Volume = 3500 }
+            };
+
+            var bmw = new Mapper(config, cnvMapper, cfgMapper).Map<ClassWithoutConstructor>(car)!;
+
+            Assert.Equal(car.Name, bmw.Name);
+            Assert.Equal(car.Manufacturer, bmw.Manufacturer);
+            Assert.Equal(car.Engine.Manufacturer, bmw.Engine.Manufacturer);
+            Assert.Equal(car.Engine.Volume, bmw.Engine.Volume);
+            Assert.Equal(car.Engine.Cylinder, bmw.Engine.Cylinder);
+        }
+
     }
 
 
