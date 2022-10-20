@@ -43,23 +43,6 @@ namespace DeepMapperTests
         }
 
         [Fact]
-        public void MapClassToValue()
-        {
-            var car = new Car
-            {
-                Name = "i9",
-                Manufacturer = "Benz",
-                Engine = null
-            };
-
-
-            var bmw = mapper.Map<ValueWithoutConstructor>(car);
-
-
-            Assert.Equal(bmw.Name, car.Name);
-        }
-
-        [Fact]
         public void MapValueToClassMustFillPropertiesWithSameName()
         {
             var car = new CarValue
