@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleMapperTests.Helpers
+namespace DeepMapperTests.Helpers
 {
     public class ClassWithLowerCase
     {
