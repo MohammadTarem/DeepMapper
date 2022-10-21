@@ -7,13 +7,22 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>DeepMapper is an easy to use object mapper. </Title>
     <Authors>Mohammad Tarem</Authors>
-    <Copyright>2022 Mohammad Tarem</Copyright>
+    <Copyright>Copyright (c) 2022 Mohammad Tarem</Copyright>
     <Description>DeepMapper is an object mapper based on reflection. It enables all types of mapping between value and reference types. It is easy to configure and can be used to deep copy an object.</Description>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/MohammadTarem/DeepMapper</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/MohammadTarem/DeepMapper</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Object Mapper; Deep Copy; Mapper</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\SimpleMapper\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
