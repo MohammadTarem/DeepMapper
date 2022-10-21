@@ -22,6 +22,28 @@ var obj = mapper.Map<TDestination>(TSource);
 
 ```
 
+Conventioal mapping can use constructors to fill destination class.
+
+```
+class TDestination 
+{
+  public TProperty Property {get; private set;}
+}
+
+// Or
+
+class TDestination 
+{
+  TDestination(TProperty property)
+  {
+     Property = property
+  }
+  public TProperty Property {get;}
+}
+ 
+```
+
+
 
 
 ### Configurational Mapping 
