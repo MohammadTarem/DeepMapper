@@ -7,7 +7,7 @@ namespace DeepMapper
     {
         public T? Map<T>(object? obj);
     }
-    internal sealed class ConventionalMapper : IConventionalMapper
+    public sealed class ConventionalMapper : IConventionalMapper
     {
         
         public ConventionalMapper() { }
