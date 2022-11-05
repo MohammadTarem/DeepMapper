@@ -1,6 +1,6 @@
 # Deep Mapper
 
-It is an object mapper with zero configuration. It maps using two methods **conventional mapping** and **configurational mapping**. It also maps the nested classes recursivley to a new instance. This library can be used for deep copying as well.
+It is an object mapper with zero configuration. It maps using two methods **conventional mapping** and **configurational mapping**. It also maps **nested classes** recursivley to a new instance. This library can be used for **deep copying** as well.
 
 
 Add DI to the project. 
@@ -15,10 +15,14 @@ services.AddDeepMapping(config =>
 
 ### Conventional Mapping
 This method requires no configurations and uses property names to map objects and set the unmatched properties to default.
-Use **IConventionalMapper** interface or **IDeepMapper**.
+Use **IConventionalMapper** interface or **IDeepMapper**. This class can be used **without DI** just by instantiating a new instance of ConventionalMapper class.
 
 ```
 var obj = mapper.Map<TDestination>(TSource);
+
+//or 
+
+var obj = new ConventionalMapper().Map<TDestination>(TSource);
 
 ```
 
@@ -42,6 +46,8 @@ class TDestination
 }
  
 ```
+
+Conventional mapper is able to map **structs** to **classes** (and vice versa) to fill properties with the same name. The convention is **case insensitive**. 
 
 
 
