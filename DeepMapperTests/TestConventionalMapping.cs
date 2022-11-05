@@ -4,16 +4,11 @@ namespace DeepMapperTests
 {
     public class TestConventionalMapping
     {
-        private MappingConfigurations configurations;
-        private IConventionalMapper cnvMapper;
-        private IConfigurationalMapper cfgMapper;
-        public TestConventionalMapping(IConfigurationalMapper cfgMapper, IConventionalMapper cnvMapper)
+        
+        
+        public TestConventionalMapping()
         {
-            configurations = new MappingConfigurations();
-            
-            configurations.UseConventionalMapping();
-            this.cfgMapper = cfgMapper;
-            this.cnvMapper = cnvMapper;
+        
         }
 
         [Fact]
@@ -32,8 +27,9 @@ namespace DeepMapperTests
             };
 
 
-            var ClassWithoutConstructor = new Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithoutConstructor>(car);
+            var ClassWithoutConstructor = new ConventionalMapper().Map<ClassWithoutConstructor>(car);
 
+            
 
             Assert.Equal(car.Name, ClassWithoutConstructor?.Name);
             Assert.Equal(car.Manufacturer, ClassWithoutConstructor?.Manufacturer);
@@ -61,7 +57,7 @@ namespace DeepMapperTests
             };
 
 
-            var ClassWithConstructor = new Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithConstructor>(car);
+            var ClassWithConstructor = new ConventionalMapper().Map<ClassWithConstructor>(car);
 
             Assert.Equal(car.Name, ClassWithConstructor?.Name);
             Assert.Equal(car.Manufacturer, ClassWithConstructor?.Manufacturer);
@@ -78,7 +74,7 @@ namespace DeepMapperTests
         {
             var ClassWithConstructor = new ClassWithConstructor("ClassWithConstructor", "ClassWithConstructor", new Engine { Manufacturer = "ClassWithConstructor", Cylinder = 12, Volume = 3500 }, 10);
 
-            var mapped = new Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithConstructor>(ClassWithConstructor);
+            var mapped = new ConventionalMapper().Map<ClassWithConstructor>(ClassWithConstructor);
 
             Assert.Equal(mapped?.Name, ClassWithConstructor.Name);
             Assert.Equal(mapped?.Manufacturer, ClassWithConstructor.Manufacturer);
@@ -106,8 +102,8 @@ namespace DeepMapperTests
                 }
             };
 
-            var ClassWithConstructor = new Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithConstructor>(car);
-            var ClassWithoutConstructor = new Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithoutConstructor>(car);
+            var ClassWithConstructor = new ConventionalMapper().Map<ClassWithConstructor>(car);
+            var ClassWithoutConstructor = new ConventionalMapper().Map<ClassWithoutConstructor>(car);
 
 
             Assert.False(object.ReferenceEquals(car.Engine, ClassWithConstructor?.Engine));
@@ -131,7 +127,7 @@ namespace DeepMapperTests
             };
 
 
-            var b = new  Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithLowerCase>(car);
+            var b = new ConventionalMapper().Map<ClassWithLowerCase>(car);
 
 
             Assert.Equal(car.Name, b?.name);
@@ -145,7 +141,7 @@ namespace DeepMapperTests
         public void MapToNullObjectMustBeNull()
         {
 
-            var b = new  Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithoutConstructor>(null);
+            var b = new ConventionalMapper().Map<ClassWithoutConstructor>(null);
 
             Assert.Null(b);
 
@@ -162,8 +158,8 @@ namespace DeepMapperTests
             };
 
 
-            var ClassWithConstructor = new Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithConstructor>(car);
-            var ClassWithoutConstructor = new Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithoutConstructor>(car);
+            var ClassWithConstructor = new ConventionalMapper().Map<ClassWithConstructor>(car);
+            var ClassWithoutConstructor = new ConventionalMapper().Map<ClassWithoutConstructor>(car);
 
 
             Assert.Null(ClassWithConstructor?.Engine);
@@ -187,7 +183,7 @@ namespace DeepMapperTests
             };
 
 
-            var b = new Mapper(configurations, cnvMapper, cfgMapper).Map<CarValue>(car);
+            var b = new ConventionalMapper().Map<CarValue>(car);
 
 
             Assert.Equal(car.Name, b.Name);
@@ -219,7 +215,7 @@ namespace DeepMapperTests
                 }
             };
 
-            var twoLevel = new Mapper(configurations, cnvMapper, cfgMapper).Map<ClassWithTwoLevelEngine>(car);
+            var twoLevel = new ConventionalMapper().Map<ClassWithTwoLevelEngine>(car);
             
 
 
