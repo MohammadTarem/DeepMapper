@@ -1,4 +1,4 @@
-﻿using DeepMapper;
+﻿using DeepMapper.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DeepMapperTests
@@ -10,7 +10,7 @@ namespace DeepMapperTests
             
             services.AddDeepMapping(c => 
             { 
-                c.UseConfigurationalMapping();
+                c.UseConventionalMapping();
             });
         }
     }
