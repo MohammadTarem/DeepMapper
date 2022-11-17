@@ -15,11 +15,11 @@
     <RepositoryUrl>https://github.com/MohammadTarem/DeepMapper</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Object Mapper; Deep Copy; Mapper</PackageTags>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\SimpleMapper\LICENSE.txt">
+    <None Include="..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
