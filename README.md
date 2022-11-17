@@ -70,6 +70,17 @@ var obj = mapper.Map<TDestination>(TSource);
 
 ```
 
+### Version 1.0.3
+- **MapAsync** has been added to IDeepMapper for async mapping.
+- Map functions has been added to IEnumerable interface for mapping collection in **DeepMapper.Extensions** namespace. This must be used when DI activated.
+- The DI extension moved to new namespcace **DeepMapper.Extensions** alongside Map for IEnumerable.
+
+
+```
+// Map for IEnumerable
+IEnumerable<TDestination> objects = IEnumerable.Map<TDestination>();
+
+```
 
 
 
