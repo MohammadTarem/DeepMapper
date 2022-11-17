@@ -9,5 +9,6 @@ namespace DeepMapper
     public interface IDeepMapper
     {   
         T? Map<T>(object? obj);
+        Task<T?> MapAsync<T>(object? obj, CancellationToken token);
     }
 }
