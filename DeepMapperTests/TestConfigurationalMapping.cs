@@ -154,7 +154,7 @@ namespace DeepMapperTests
                 Engine = new Engine { Manufacturer = "BMW", Cylinder = 8, Volume = 3500 }
             };
 
-            Assert.Throws<Exception>(() =>
+            Assert.ThrowsAny<Exception>(() =>
             {
                 _ = new Mapper(config, cnvMapper, cfgMapper).Map<ClassWithConstructor>(car)!;
             });
