@@ -91,7 +91,7 @@ namespace DeepMapper
 
         }
 
-        private  object? Map(Type type, object? obj)
+        public object? Map(Type type, object? obj)
         {
             if (obj == null) return default;
 
