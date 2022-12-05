@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/MohammadTarem/DeepMapper</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Object Mapper; Deep Copy; Mapper</PackageTags>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
