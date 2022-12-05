@@ -24,6 +24,10 @@ var obj = mapper.Map<TDestination>(TSource);
 
 var obj = new ConventionalMapper().Map<TDestination>(TSource);
 
+//or 
+
+var destintion = new ConventionalMapper().Map(Type destinationType, object? sourceObject)
+
 ```
 
 Conventioal mapping can use constructors to fill destination class.
