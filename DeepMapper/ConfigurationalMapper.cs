@@ -23,7 +23,7 @@ namespace DeepMapper
             
         }
 
-        private  T CreateInstance<T>()
+        private static T CreateInstance<T>()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace DeepMapper
 
         }
 
-        private  void SetProperty(Bind bind, object? source, object? destination)
+        private static  void SetProperty(Bind bind, object? source, object? destination)
         {
             var destProperty = destination?.GetType().GetProperty(bind.Destination, true)!;
 
@@ -61,7 +61,7 @@ namespace DeepMapper
 
         }
 
-        private  IEnumerable<Bind> RemoveIgnoredProperties(ITypeBinding typeBinding)
+        private static IEnumerable<Bind> RemoveIgnoredProperties(ITypeBinding typeBinding)
         {
 
             var ignoreBinds = typeBinding.Binds

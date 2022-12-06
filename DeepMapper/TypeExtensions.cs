@@ -10,7 +10,7 @@ namespace DeepMapper
     internal static class TypeExtensions
     {
         public static ConstructorInfo? GetConstroctorWithMaxParams(this Type type) => type.GetConstructors()
-                       .MaxBy(ctor => ctor.GetParameters().Count());
+                       .MaxBy(ctor => ctor.GetParameters().Length);
 
         public static IEnumerable<PropertyInfo> GetWritableProperties(this Type type) =>
             type.GetProperties().Where(p => p.CanWrite);

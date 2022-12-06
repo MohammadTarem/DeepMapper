@@ -100,7 +100,7 @@ namespace DeepMapper
             {
                 return MapValues(type, obj);
             }
-            else if (ctor!.GetParameters().Count() == 0)
+            else if (ctor!.GetParameters().Length == 0)
             {
                 return MapUsingProperties(type, ctor, obj);
             }

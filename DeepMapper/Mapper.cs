@@ -11,9 +11,9 @@ namespace DeepMapper
     public sealed class Mapper : IDeepMapper
     {
         
-        private IConventionalMapper conventionalMapper;
-        private IConfigurationalMapper configurationalMapper;
-        private MappingConfigurations configurations;
+        private readonly IConventionalMapper conventionalMapper;
+        private readonly IConfigurationalMapper configurationalMapper;
+        private readonly MappingConfigurations configurations;
         public Mapper(MappingConfigurations configuration, IConventionalMapper cnvMapper, IConfigurationalMapper cfgMapper)
         {
             conventionalMapper = cnvMapper;
@@ -45,7 +45,7 @@ namespace DeepMapper
                     if (binding == null)
                     {
                         return configurations.CanUseConventionalMapping ?
-                                        conventionalMapper.Map<T>(obj) : default(T);
+                                        conventionalMapper.Map<T>(obj) : default;
                     }
                     else
                     {
