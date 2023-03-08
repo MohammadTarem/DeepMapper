@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System.Dynamic;
+using System.Linq.Expressions;
+using System.Reflection;
 
 
 namespace DeepMapper
@@ -12,26 +14,34 @@ namespace DeepMapper
         
         public ConventionalMapper() { }
 
-        private  void SetProperty(PropertyInfo property, object? source, object destination)
+        private void SetProperty(PropertyInfo property, object? sourceObject, object destinationObject)
         {
-            var sourceProperty = source?.GetType().GetProperty(property.Name, true);
-            if (property.PropertyType == sourceProperty?.PropertyType)
+            var sourceProperty = sourceObject?.GetType().GetProperty(property.Name, true);
+            SetPropertyValue(property, sourceProperty?.GetValue(sourceObject), destinationObject);
+        }
+
+        private void SetPropertyValue(PropertyInfo property, object? sourceProperty, object destinationObject)
+        {
+            
+            var sourcePropertyType = sourceProperty?.GetType();
+            if (property.PropertyType == sourcePropertyType)
             {
                 if (property.IsNestedProperty())
                 {
-                    var nested = Map(sourceProperty.PropertyType, sourceProperty.GetValue(source));
-                    property.SetValue(destination, nested);
+                    var nested = Map(sourcePropertyType, sourceProperty);
+                    property.SetValue(destinationObject, nested);
                 }
                 else
                 {
-                    property.SetValue(destination, sourceProperty?.GetValue(source));
+                    property.SetValue(destinationObject, sourceProperty);
                 }
 
             }
             else
             {
-                property.SetValue(destination, default);
+                property.SetValue(destinationObject, default);
             }
+
         }
 
         private  object MapUsingProperties(Type type, ConstructorInfo ctor, object? obj)
@@ -75,8 +85,13 @@ namespace DeepMapper
             return ctor.Invoke(parameters.ToArray());
         }
 
-        private  object? MapValues(Type type, object? obj)
+        private  object? MapValues(Type type, ConstructorInfo? ctor, object? obj)
         {
+            
+            if(ctor != null)
+            {
+                return MapUsingConstructor(ctor, obj);
+            }
 
             var mapped = type.Assembly.CreateInstance(type.FullName ?? type.Name);
             mapped?.GetType()
@@ -91,16 +106,43 @@ namespace DeepMapper
 
         }
 
+        private object? MapDictionary(Type type, IDictionary<string, object?> keyValues)
+        {
+
+            var mapped = type.InstantiateObjectWithDefaultConstructor();
+            type.GetWritableProperties().ToList()
+            .ForEach(property =>
+            {
+                object? obj = null;
+                if (keyValues.TryGetValue(property.Name, out obj) ||
+                   keyValues.TryGetValue(property.Name.ToLower(), out obj))
+                {
+                    SetPropertyValue(property, obj, mapped);
+                }
+
+            });
+
+            return mapped;
+
+        }
+
         public object? Map(Type type, object? obj)
         {
             if (obj == null) return default;
+            
+            if(obj is IDictionary<string, object> dictionary)
+            {
+                return MapDictionary(type, dictionary);
+            }
 
             var ctor = type.GetConstroctorWithMaxParams();
-            if (ctor == null && type.IsValueType)
+
+            if (type.IsValueType)
             {
-                return MapValues(type, obj);
+                return MapValues(type, ctor, obj);
             }
-            else if (ctor!.GetParameters().Length == 0)
+            
+            if(ctor!.GetParameters().Length == 0)
             {
                 return MapUsingProperties(type, ctor, obj);
             }
@@ -108,6 +150,7 @@ namespace DeepMapper
             {
                 return MapUsingConstructor(ctor, obj);
             }
+            
         }
 
         public T? Map<T>(object? obj)
@@ -123,5 +166,8 @@ namespace DeepMapper
             }
         }
 
+        
+
     }
+   
 }

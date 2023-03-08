@@ -224,6 +224,21 @@ namespace DeepMapperTests
 
         }
 
+        [Fact]
+        public void MapUsingKeyValueDictionayCaseInSensitive()
+        {
+            var keyValue = new Dictionary<string, object?>();
+            keyValue["Name"] = "BMW";
+            keyValue["manufacturer"] = "BM";
+            keyValue["Engine"] = null;
+
+            var c = new ConventionalMapper().Map<ClassWithoutConstructor>(keyValue);
+
+            Assert.Equal("BMW", c?.Name);
+            Assert.Equal("BM", c?.Manufacturer);
+            Assert.Equal(null, c?.Engine);
+        }
+
 
 
 
