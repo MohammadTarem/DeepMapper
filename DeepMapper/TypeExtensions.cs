@@ -15,9 +15,9 @@ namespace DeepMapper
         public static IEnumerable<PropertyInfo> GetWritableProperties(this Type type) =>
             type.GetProperties().Where(p => p.CanWrite);
 
-        public static PropertyInfo? GetProperty(this Type type, string name, bool caseSensitive)
+        public static PropertyInfo? GetProperty(this Type type, string name, bool caseInSensitive)
         {
-            if (caseSensitive)
+            if (caseInSensitive)
             {
                 return type.GetProperty(name.ToLower(),
                                         BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
