@@ -236,7 +236,22 @@ namespace DeepMapperTests
 
             Assert.Equal("BMW", c?.Name);
             Assert.Equal("BM", c?.Manufacturer);
-            Assert.Equal(null, c?.Engine);
+            Assert.Null(c?.Engine);
+        }
+
+        [Fact]
+        public void MapUsingDictionaryMustWorkOnNestedClasses()
+        {
+            var keyValues = new Dictionary<string, object?>();
+            keyValues["Name"] = "BMW";
+            keyValues["manufacturer"] = "BM";
+            keyValues["Engine"] = new Engine { Cylinder = 1, Manufacturer = "MM", Volume = 1 } ;
+
+            var c = new ConventionalMapper().Map<ClassWithoutConstructor>(keyValues);
+
+            Assert.Equal("BMW", c?.Name);
+            Assert.Equal("BM", c?.Manufacturer);
+            Assert.Equal((keyValues["Engine"] as Engine)?.Cylinder, c?.Engine.Cylinder);
         }
 
 
