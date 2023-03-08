@@ -86,6 +86,21 @@ IEnumerable<TDestination> objects = IEnumerable.Map<TDestination>();
 
 ```
 
+### Version 1.0.5
+- **MapDictionary** has been added to Conventional mapper.
+
+```
+var keyValue = new Dictionary<string, object?>();
+keyValue["P1"] = "ONE";
+keyValue["P2"] = "TWO";
+keyValue["P3"] = new object();
+
+var newObj = new ConventionalMapper().Map<T>(keyValue);
+
+```
+
+
+
 
 
 
