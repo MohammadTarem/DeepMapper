@@ -35,6 +35,20 @@ namespace DeepMapper
         public static ConstructorInfo? GetDefaultConstructor(this Type type) => 
             type.GetConstructors().FirstOrDefault( c => c.GetParameters().Length == 0);
 
+        public static object InstantiateObjectWithDefaultConstructor(this Type type)
+        {
+            var ctor = type.GetDefaultConstructor();
+            try
+            {
+                return ctor!.Invoke(null);
+            }
+            catch
+            {
+                throw new InvalidOperationException("The class does not have default constructor.");
+            }
+            
+        }
+
         public static object? ConstructNewInstance(this Type type) => type.Assembly.CreateInstance(type.FullName!);
         
     }
