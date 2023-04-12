@@ -99,7 +99,8 @@ var newObj = new ConventionalMapper().Map<T>(keyValue);
 
 ```
 
-
+### Version 1.0.6
+Fixes bug in nested objects beeing mapped to null
 
 
 
