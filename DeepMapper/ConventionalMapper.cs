@@ -1,7 +1,5 @@
-﻿using System.Dynamic;
-using System.Linq.Expressions;
+﻿
 using System.Reflection;
-
 
 namespace DeepMapper
 {
@@ -24,22 +22,22 @@ namespace DeepMapper
         {
             
             var sourcePropertyType = sourceProperty?.GetType();
-            if (property.PropertyType == sourcePropertyType)
+            if (property.IsNestedProperty())
             {
-                if (property.IsNestedProperty())
+                if(sourcePropertyType != null)
                 {
-                    var nested = Map(sourcePropertyType, sourceProperty);
+                    var nested = Map(property.PropertyType, sourceProperty);
                     property.SetValue(destinationObject, nested);
                 }
                 else
                 {
-                    property.SetValue(destinationObject, sourceProperty);
+                    property.SetValue(destinationObject, default);
                 }
-
+                
             }
             else
             {
-                property.SetValue(destinationObject, default);
+                property.SetValue(destinationObject, sourceProperty);
             }
 
         }
@@ -130,7 +128,7 @@ namespace DeepMapper
         {
             if (obj == null) return default;
             
-            if(obj is IDictionary<string, object> dictionary)
+            if(obj is IDictionary<string, object?> dictionary)
             {
                 return MapDictionary(type, dictionary);
             }
@@ -165,6 +163,15 @@ namespace DeepMapper
                 return default;
             }
         }
+
+        //public T? MapFromJsonString<T>(string json )
+        //{
+        //    var obj = JsonSerializer.Deserialize<JsonObject>(json)
+        //                            .ToDictionary()
+        //    //var s = obj.to
+
+        //    return Map<T>(obj);
+        //}
 
         
 
