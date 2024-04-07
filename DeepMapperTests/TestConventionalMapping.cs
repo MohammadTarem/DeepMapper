@@ -1,5 +1,9 @@
 using DeepMapperTests.Helpers;
 using DeepMapper;
+using Newtonsoft;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace DeepMapperTests
 {
     public class TestConventionalMapping
@@ -254,6 +258,53 @@ namespace DeepMapperTests
             Assert.Equal((keyValues["Engine"] as Engine)?.Cylinder, c?.Engine.Cylinder);
         }
 
+        [Fact]
+        public void DeepMapTesting()
+        {
+            var customer = new Customer()
+            {
+                Id = 1,
+                Email = "123@gmail.com",
+                Address = "Ankara",
+                LastName = "Ta",
+                Name = "Mo"
+            };
+
+            var account = new Account()
+            {
+                Customer = customer,
+                AccountNumber = "1",
+                AccountType = "B",
+                Created = DateTime.Now
+            };
+
+            var a = new ConventionalMapper().Map<AccountDto>(account);
+
+            Assert.True(a.Customer.Name == account.Customer.Name);
+
+        }
+
+        //[Fact]
+        //public void MapFromJsonStringMustWork()
+        //{
+        //    var json = "{ \"name\" : \"BMW\", \"manufacturer\" : \"BM\", \"Engine\":{\"Volume\":1} }";
+
+        //    //var jObject = JObject.Parse(json);
+        //    //var name = jObject.Property("name").ToObject(typeof(string));
+        //    //var manu = jObject.Property("manufacturer").ToObject(typeof(string));
+        //    //var eng = jObject.Property("Engine").To  ToObject(typeof(Engine));
+
+
+
+
+
+
+        //    var c = new ConventionalMapper().Map<ClassWithoutConstructor>(json);
+
+        //    //Assert.Equal("BMW", c?.Name);
+        //    //Assert.Equal("manufacturer", c?.Manufacturer);
+
+        //}
 
 
 
