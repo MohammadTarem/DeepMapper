@@ -154,14 +154,7 @@ namespace DeepMapper
         public T? Map<T>(object? obj)
         {
             var mapped = Map(typeof(T), obj);
-            if (mapped != null)
-            {
-                return (T)mapped;
-            }
-            else
-            {
-                return default;
-            }
+            return mapped != null ? (T)mapped : default;
         }
 
         //public T? MapFromJsonString<T>(string json )
