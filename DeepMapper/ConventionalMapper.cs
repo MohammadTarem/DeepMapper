@@ -12,13 +12,13 @@ namespace DeepMapper
         
         public ConventionalMapper() { }
 
-        private void SetProperty(PropertyInfo property, object? sourceObject, object destinationObject)
+        private void SetPropertyUsingParent(PropertyInfo property, object? sourceObject, object destinationObject)
         {
             var sourceProperty = sourceObject?.GetType().GetProperty(property.Name, true);
-            SetPropertyValue(property, sourceProperty?.GetValue(sourceObject), destinationObject);
+            SetProperty(property, sourceProperty?.GetValue(sourceObject), destinationObject);
         }
 
-        private void SetPropertyValue(PropertyInfo property, object? sourceProperty, object destinationObject)
+        private void SetProperty(PropertyInfo property, object? sourceProperty, object destinationObject)
         {
             
             var sourcePropertyType = sourceProperty?.GetType();
@@ -49,7 +49,7 @@ namespace DeepMapper
             type.GetWritableProperties().ToList()
             .ForEach(property =>
             {
-                SetProperty(property, obj, mapped);
+                SetPropertyUsingParent(property, obj, mapped);
             });
 
             return mapped;
@@ -97,7 +97,7 @@ namespace DeepMapper
                   .ToList()
                   .ForEach(property =>
                   {
-                      SetProperty(property, obj, mapped);
+                      SetPropertyUsingParent(property, obj, mapped);
                   });
 
             return mapped;
@@ -115,7 +115,7 @@ namespace DeepMapper
                 if (keyValues.TryGetValue(property.Name, out obj) ||
                    keyValues.TryGetValue(property.Name.ToLower(), out obj))
                 {
-                    SetPropertyValue(property, obj, mapped);
+                    SetProperty(property, obj, mapped);
                 }
 
             });
