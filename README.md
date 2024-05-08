@@ -57,7 +57,7 @@ Conventional mapper is able to map **structs** to **classes** (and vice versa) t
 
 
 ### Configurational Mapping 
-In this method the library uses configuration for a types in the service registeration. 
+In this method the library uses configuration for a types in the service registration. 
 
 ```
 config.Map<TSource, TDestination>()
@@ -77,7 +77,7 @@ var obj = mapper.Map<TDestination>(TSource);
 ### Version 1.0.3
 - **MapAsync** has been added to IDeepMapper for async mapping.
 - Map functions has been added to IEnumerable interface for mapping collection in **DeepMapper.Extensions** namespace. This must be used when DI activated.
-- The DI extension moved to new namespcace **DeepMapper.Extensions** alongside Map for IEnumerable.
+- The DI extension moved to new namespace **DeepMapper.Extensions** alongside Map for IEnumerable.
 
 
 ```
@@ -100,9 +100,16 @@ var newObj = new ConventionalMapper().Map<T>(keyValue);
 ```
 
 ### Version 1.0.6
-Fixes bug in nested objects beeing mapped to null
+- Fixes bug in nested objects being mapped to null.
 
 
+### Version 1.0.7
+- Adds array mapping to type T[]. The array can be in an object as a property or as root. The mapping between IList is not supported and the property must be of type T[].
 
+```
+
+T[] newObj = new ConventionalMapper().Map<T[]>(sourceObj);
+
+```
 
 
