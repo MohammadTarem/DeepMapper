@@ -12,10 +12,10 @@ namespace DeepMapper
         
         public ConventionalMapper() { }
 
-        private void SetPropertyUsingParent(PropertyInfo property, object? sourceObject, object destinationObject)
+        private void SetPropertyUsingParent(PropertyInfo property, object? sourceParentObject, object destinationObject)
         {
-            var sourceProperty = sourceObject?.GetType().GetProperty(property.Name, true);
-            SetProperty(property, sourceProperty?.GetValue(sourceObject), destinationObject);
+            var sourceProperty = sourceParentObject?.GetType().GetProperty(property.Name, true);
+            SetProperty(property, sourceProperty?.GetValue(sourceParentObject), destinationObject);
         }
 
         private void SetProperty(PropertyInfo property, object? sourceProperty, object destinationObject)
@@ -132,6 +132,8 @@ namespace DeepMapper
             {
                 return MapDictionary(type, dictionary);
             }
+
+            
 
             var ctor = type.GetConstroctorWithMaxParams();
 
